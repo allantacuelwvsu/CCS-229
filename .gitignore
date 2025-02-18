@@ -1,0 +1,15 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore VSCode settings
+.vscode/
+
+# Ignore Streamlit-specific cache
+.streamlit/
