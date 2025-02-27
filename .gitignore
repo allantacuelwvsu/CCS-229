@@ -3,6 +3,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.pkl
 
 # Ignore virtual environments
 venv/
@@ -13,3 +14,5 @@ env/
 
 # Ignore Streamlit-specific cache
 .streamlit/
+
+carprices_preprocessed.csv
