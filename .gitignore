@@ -15,4 +15,4 @@ env/
 # Ignore Streamlit-specific cache
 .streamlit/
 
-carprices_preprocessed.csv
+carprices_preprocessed.csvTitanic-Survival/
