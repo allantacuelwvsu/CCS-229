@@ -42,13 +42,32 @@ st.pyplot(fig)
 # Predictor
 st.header("Predict Survival")
 
-pclass = st.selectbox("Passenger Class", [1, 2, 3])
-sex = st.radio("Sex", ["Male", "Female"])
-age = st.slider("Age", 0, 100, 30)
-sibsp = st.slider("Siblings/Spouses Aboard", 0, 8, 0)
-parch = st.slider("Parents/Children Aboard", 0, 6, 0)
-fare = st.number_input("Fare", 0.0, 500.0, 30.0)
-embarked = st.selectbox("Port of Embarkation", ["C", "Q", "S"])
+# Preset Character Data
+def set_character(pclass, sex, age, sibsp, parch, fare, embarked):
+    st.session_state.pclass = pclass
+    st.session_state.sex = sex
+    st.session_state.age = age
+    st.session_state.sibsp = sibsp
+    st.session_state.parch = parch
+    st.session_state.fare = fare
+    st.session_state.embarked = embarked
+    
+with st.expander("Movie Characters"):
+    col1, col2 = st.columns(2)
+    with col1:
+        st.button("Rose DeWitt Bukater", on_click=set_character, args=(1, "Female", 17, 0, 1, 300.0, "S")) # Rose was 17, embarked from South Hampton, was in first class and paid $300 as an estimate of the average of the 1st class fare, maybe a slightly less luxurious cabin. . She was with her mother.
+        st.button("Jack Dawson", on_click=set_character, args=(3, "Male", 20, 0, 0, 8.05, "S")) # Jack was 20, embarked from South Hampton, was in third class and paid a random estimate of $8.05 as the bet for the poker game where he won is 3rd class ticket. Of course, he was alone.
+    with col2:
+        st.button("Caledon Hockley", on_click=set_character, args=(1, "Male", 30, 0, 0, 500.0, "C")) # Caledon was 30, embarked from Cherbourg, was in first class and paid $500 as an estimate of the high average of the 1st class fare. He was alone.
+        st.button("Ruth DeWitt Bukater", on_click=set_character, args=(1, "Female", 45, 0, 1, 300.0, "S")) # Ruth was 45, embarked from South Hampton, was in first class and paid $300 as an estimate of the average of the 1st class fare. She was with her daughter.
+
+pclass = st.selectbox("Passenger Class", [1, 2, 3], index=[1, 2, 3].index(st.session_state.get("pclass", 3)))
+sex = st.radio("Sex", ["Male", "Female"], index=["Male", "Female"].index(st.session_state.get("sex", "Male")))
+age = st.slider("Age", 0, 100, st.session_state.get("age", 30))
+sibsp = st.slider("Siblings/Spouses Aboard", 0, 8, st.session_state.get("sibsp", 0))
+parch = st.slider("Parents/Children Aboard", 0, 6, st.session_state.get("parch", 0))
+fare = st.number_input("Fare", 0.0, 500.0, st.session_state.get("fare", 30.0))
+embarked = st.selectbox("Port of Embarkation", ["C", "Q", "S"], index=["C", "Q", "S"].index(st.session_state.get("embarked", "S")))
 
 # Process Input
 sex = 1 if sex == "Female" else 0
